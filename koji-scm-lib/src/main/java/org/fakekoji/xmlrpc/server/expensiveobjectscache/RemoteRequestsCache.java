@@ -250,7 +250,7 @@ public class RemoteRequestsCache {
                 bw.flush();
             }
         } catch (Exception ex) {
-            LOG.info("failed to dump cache", ex);
+            LOG.debug("failed to dump cache", ex);
         }
     }
 
@@ -259,7 +259,7 @@ public class RemoteRequestsCache {
         this.originalProvider = originalObjectProvider;
         ConfigRefresh r = new ConfigRefresh();
         r.read();
-        LOG.info("Cache started - " + RemoteRequestCacheConfigKeys.CACHE_REFRESH_RATE_MINUTES + " is " + cacheRefreshRateMinutes + " (0==disabled). Set config is: " + getConfigString());
+        LOG.debug("Cache started - " + RemoteRequestCacheConfigKeys.CACHE_REFRESH_RATE_MINUTES + " is " + cacheRefreshRateMinutes + " (0==disabled). Set config is: " + getConfigString());
         Thread t = new Thread(r, "expensiveobjectscacheRemoteRequestsCache");
         t.setDaemon(true);
         t.start();

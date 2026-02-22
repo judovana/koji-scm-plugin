@@ -84,7 +84,7 @@ public class KojiSCM extends SCM implements LoggerHelp, Serializable {
 
     @Override
     public void log(String s) {
-        LOG.info(s);
+        LOG.debug(s);
         if (canLog()) {
             print("[KojiSCM][" + host() + "] " + s);
         }
@@ -92,7 +92,7 @@ public class KojiSCM extends SCM implements LoggerHelp, Serializable {
 
     @Override
     public void log(String s, Object o) {
-        LOG.info(s, o);
+        LOG.debug(s, o);
         if (canLog()) {
             if (o == null) {
                 o = "null";
@@ -103,7 +103,7 @@ public class KojiSCM extends SCM implements LoggerHelp, Serializable {
 
     @Override
     public void log(String s, Object... o) {
-        LOG.info(s, o);
+        LOG.debug(s, o);
         if (canLog()) {
             print("[KojiSCM][" + host() + "] " + s);
             for (Object object : o) {

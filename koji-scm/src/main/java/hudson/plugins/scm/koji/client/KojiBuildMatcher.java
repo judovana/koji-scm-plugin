@@ -75,7 +75,7 @@ class KojiBuildMatcher extends BuildMatcher {
     }
 
     Build getBuild(Build build) {
-        LOG.info("Oldest not processed build: " + build.getNvr());
+        LOG.debug("Oldest not processed build: " + build.getNvr());
         final List<RPM> rpms = new ArrayList<>();
         rpms.addAll(retrieveRPMs(build));
         rpms.addAll(retrieveArchives(build));

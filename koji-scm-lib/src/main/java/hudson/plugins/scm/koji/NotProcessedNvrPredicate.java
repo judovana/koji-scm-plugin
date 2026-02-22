@@ -96,9 +96,9 @@ public class NotProcessedNvrPredicate implements Predicate<String>, java.io.Seri
 
     @Override
     public boolean test(String nvr) {
-        LOG.info("Searching for " + nvr + " in " + processedNvrs.toString());
+        LOG.debug("Searching for " + nvr + " in " + processedNvrs.toString());
         boolean result = !processedNvrs.contains(nvr);
-        LOG.info("found[" + nvr + "]: " + !result);
+        LOG.debug("found[" + nvr + "]: " + !result);
         return result;
     }
 

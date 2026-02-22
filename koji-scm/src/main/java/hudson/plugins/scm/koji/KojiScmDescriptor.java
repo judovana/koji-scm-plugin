@@ -39,33 +39,33 @@ public class KojiScmDescriptor extends SCMDescriptor<KojiSCM> {
     public boolean configure(StaplerRequest2 req, JSONObject json) throws FormException {
         this.KojiSCMConfig_requireWorkspace = json.getBoolean("KojiSCMConfig_requireWorkspace");
         this.KojiSCMConfig_skipPoolingIfJobRuns = json.getBoolean("KojiSCMConfig_skipPoolingIfJobRuns");
-        LOG.info("KojiSCMConfig_requireWorkspace configured to: " + KojiSCMConfig_requireWorkspace);
-        LOG.info("KojiSCMConfig_skipPoolingIfJobRuns configured to: " + KojiSCMConfig_skipPoolingIfJobRuns);
+        LOG.debug("KojiSCMConfig_requireWorkspace configured to: " + KojiSCMConfig_requireWorkspace);
+        LOG.debug("KojiSCMConfig_skipPoolingIfJobRuns configured to: " + KojiSCMConfig_skipPoolingIfJobRuns);
         save();
         return true;
     }
 
     public boolean getKojiSCMConfig_requireWorkspace() {
-        LOG.info("KojiSCMConfig_requireWorkspace returning " + KojiSCMConfig_requireWorkspace);
+        LOG.debug("KojiSCMConfig_requireWorkspace returning " + KojiSCMConfig_requireWorkspace);
         return KojiSCMConfig_requireWorkspace;
     }
 
     public boolean getKojiSCMConfig_skipPoolingIfJobRuns() {
-        LOG.info("KojiSCMConfig_skipPoolingIfJobRuns returning " + KojiSCMConfig_skipPoolingIfJobRuns);
+        LOG.debug("KojiSCMConfig_skipPoolingIfJobRuns returning " + KojiSCMConfig_skipPoolingIfJobRuns);
         return KojiSCMConfig_skipPoolingIfJobRuns;
     }
 
     @DataBoundSetter
     public void setKojiSCMConfig_requireWorkspace(boolean kojiSCMConfig) {
         // TODO implement complex refreshing logic
-        LOG.info("KojiSCMConfig_requireWorkspace set from" + KojiSCMConfig_requireWorkspace + " to " + kojiSCMConfig);
+        LOG.debug("KojiSCMConfig_requireWorkspace set from" + KojiSCMConfig_requireWorkspace + " to " + kojiSCMConfig);
         this.KojiSCMConfig_requireWorkspace = kojiSCMConfig;
     }
 
     @DataBoundSetter
     public void setKojiSCMConfig_skipPoolingIfJobRuns(boolean kojiSCMConfig) {
         // TODO implement complex refreshing logic
-        LOG.info("KojiSCMConfig_skipPoolingIfJobRuns set from" + KojiSCMConfig_skipPoolingIfJobRuns + " to " + kojiSCMConfig);
+        LOG.debug("KojiSCMConfig_skipPoolingIfJobRuns set from" + KojiSCMConfig_skipPoolingIfJobRuns + " to " + kojiSCMConfig);
         this.KojiSCMConfig_skipPoolingIfJobRuns = kojiSCMConfig;
     }
 }

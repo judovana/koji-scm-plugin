@@ -516,7 +516,7 @@ public class KojiBuildDownloader implements FilePath.FileCallable<KojiBuildDownl
 
     @Override
     public void log(String s) {
-        LOG.info(s);
+        LOG.debug(s);
         if (canLog()) {
             print("[KojiSCM][" + host() + "] " + s);
         }
@@ -524,7 +524,7 @@ public class KojiBuildDownloader implements FilePath.FileCallable<KojiBuildDownl
 
     @Override
     public void log(String s, Object o) {
-        LOG.info(s, o);
+        LOG.debug(s, o);
         if (canLog()) {
             print("[KojiSCM][" + host() + "] " + s + ": " + o.toString());
         }
@@ -532,7 +532,7 @@ public class KojiBuildDownloader implements FilePath.FileCallable<KojiBuildDownl
 
     @Override
     public void log(String s, Object... o) {
-        LOG.info(s, o);
+        LOG.debug(s, o);
         if (canLog()) {
             print("[KojiSCM][" + host() + "] " + s);
             for (Object object : o) {
@@ -545,7 +545,7 @@ public class KojiBuildDownloader implements FilePath.FileCallable<KojiBuildDownl
         try {
             return isUrlReachableImpl(urlString, MAX_REDIRECTIONS);
         } catch (Exception e) {
-            LOG.info(e.toString());
+            LOG.debug(e.toString());
             return false;
         }
     }
