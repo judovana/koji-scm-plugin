@@ -1,6 +1,10 @@
-# Fake Koji SCM
+# Koji SCM
+ 
+Is an powerfull jenkisn SCM plugin, allwoing you to pull from [koji-based](https://pagure.io/koji) build systems, like https://koji.fedoraproject.org/koji/.  
+Next t the plugin itself, the project contains also dymy file hosting server with koji-like XML-RPC api and one custom api.
 
 ### Table of Contents
+* [Jenkins SCM Koji Plugin](#jenkins-scm-koji-plugin)
 * [Fake Koji](#fake-koji)
     * [Naming Convention](#naming-convention)
     * [SCP Upload](#scp-upload)
@@ -8,8 +12,52 @@
     * [Curl API](#curl-api)
     * [HTTP File Listing](#http-file-listing)
     * [HTTP View](#http-view)
-* [Jenkins SCM Koji Plugin](#jenkins-scm-koji-plugin)
 * [Future goals](#future-goals)
+
+
+## Jenkins SCM Koji Plugin
+#### Configuration
+* `Koji top URLs`
+  * URL of Kojihub, Brewhub or Fake Koji
+  * this is the URL of xml-rpc server, from which plugin gets builds' information
+  * can contain more than URLs separated by space, first URL found first served
+* `Koji download URLs`
+  * RPMs or archives get downloaded from these URLs
+  * can contain multiple URLs separated by space, first URL found first served
+* `Package name`
+  * package name to watch
+  * can contain multiple names separated by space
+* `Package arch`
+  * only builds for specified arch will be used
+  * can be empty
+  * can contain multiple archs separated by coma
+* `Package tag`
+  * only builds containing specified tag
+  * may be empty to match all the builds
+  * supports glob pattern
+* `Excluding NVRs`
+  * glob patterns for NVRs not to download.
+  * example: `{*debug*, *src*}`
+* `Download directory`
+  * name of directory inside Jenkins' workspace to download RPMs/archives
+  * if empty, the RPMs/archives will be downloaded directly into workspace
+* `Max previous builds`
+  * max number of previous builds to check, in case there's more of them
+* `Clean download directory`
+  * removes all the content of the download directory before the download
+* `Create subdirectory for each NVR`
+  * creates subdirectiory under the download directory where the name of subdirectory is going to be the name of the NVR of the RPM package
+
+##### Configuration examples
+
+![koji-plugin-config-01](https://user-images.githubusercontent.com/31389543/43509489-1cb3f268-9573-11e8-925e-634b4100b5fb.png)
+
+![koji-plugin-config-02](https://user-images.githubusercontent.com/31389543/43509492-1e6c8f0c-9573-11e8-976f-86c87db1f4e4.png)
+
+### Results package
+
+After Jenkins jobs is finished, the plugin generates a page with results information. This page shows what specific build was used(name, version, release, NVR, tags), what RPMs or archives were downloaded, links and hash sums to this build can be also found here. If available, sources of build are included.
+![jenkinks-plugin-result-page](https://user-images.githubusercontent.com/31389543/43505723-1b2f39ee-9568-11e8-829c-ee03f6677a62.png)
 
 ## Fake Koji
 Fake Koji serves as a storage for builds along with logs and source snapshots.
@@ -226,51 +274,6 @@ This is the frontend of fake Koji. Here you can see the latest successful builds
 ![fake-koji-preview](https://user-images.githubusercontent.com/31389543/43505713-167730fa-9568-11e8-89de-39a43297c136.png)
 
 ![fake-koji-preview-details](https://user-images.githubusercontent.com/31389543/43505715-198779ee-9568-11e8-95ac-cc9e87626d51.png)
-
-## Jenkins SCM Koji Plugin
-Next to Fake Koji there is Jenkins plugin, which ensures cooperation between Jenkins and Fake Koji. Based on configuration, plugin provides builds. `-Dhudson.remoting.ClassFilter=hudson.plugins.scm.koji.model.Build,hudson.plugins.scm.koji.model.RPM,hudson.plugins.scm.koji.model.BuildProvider` may be still necessary to add to jenkins start up.
-#### Configuration
-* `Koji top URLs`
-  * URL of Kojihub, Brewhub or Fake Koji
-  * this is the URL of xml-rpc server, from which plugin gets builds' information
-  * can contain more than URLs separated by space, first URL found first served
-* `Koji download URLs`
-  * RPMs or archives get downloaded from these URLs
-  * can contain multiple URLs separated by space, first URL found first served
-* `Package name`
-  * package name to watch
-  * can contain multiple names separated by space
-* `Package arch`
-  * only builds for specified arch will be used
-  * can be empty
-  * can contain multiple archs separated by coma
-* `Package tag`
-  * only builds containing specified tag
-  * may be empty to match all the builds
-  * supports glob pattern
-* `Excluding NVRs`
-  * glob patterns for NVRs not to download.
-  * example: `{*debug*, *src*}`
-* `Download directory`
-  * name of directory inside Jenkins' workspace to download RPMs/archives
-  * if empty, the RPMs/archives will be downloaded directly into workspace
-* `Max previous builds`
-  * max number of previous builds to check, in case there's more of them
-* `Clean download directory`
-  * removes all the content of the download directory before the download
-* `Create subdirectory for each NVR`
-  * creates subdirectiory under the download directory where the name of subdirectory is going to be the name of the NVR of the RPM package
-
-##### Configuration examples
-
-![koji-plugin-config-01](https://user-images.githubusercontent.com/31389543/43509489-1cb3f268-9573-11e8-925e-634b4100b5fb.png)
-
-![koji-plugin-config-02](https://user-images.githubusercontent.com/31389543/43509492-1e6c8f0c-9573-11e8-976f-86c87db1f4e4.png)
-
-### Results package
-
-After Jenkins jobs is finished, the plugin generates a page with results information. This page shows what specific build was used(name, version, release, NVR, tags), what RPMs or archives were downloaded, links and hash sums to this build can be also found here. If available, sources of build are included.
-![jenkinks-plugin-result-page](https://user-images.githubusercontent.com/31389543/43505723-1b2f39ee-9568-11e8-829c-ee03f6677a62.png)
 
 ## Future goals
 
