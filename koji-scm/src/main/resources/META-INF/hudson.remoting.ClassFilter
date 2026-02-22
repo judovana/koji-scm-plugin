@@ -1,0 +1,3 @@
+hudson.plugins.scm.koji.model.Build
+hudson.plugins.scm.koji.model.RPM
+hudson.plugins.scm.koji.model.BuildProvider
